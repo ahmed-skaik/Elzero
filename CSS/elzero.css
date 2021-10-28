@@ -431,6 +431,9 @@ header .mega-menu .img img {
 }
 
 @media (max-width: 767px) {
+  .landing::before {
+    top: -85px;
+  }
   .landing .container {
     min-height: calc(100vh - 90px);
   }
@@ -480,6 +483,12 @@ header .mega-menu .img img {
   left: 50%;
   transform: translateX(-50%);
   transition: var(--main-transition);
+}
+
+@media (max-width: 767px) {
+  .landing > a {
+    bottom: 65px;
+  }
 }
 
 .landing > a:hover {
@@ -1153,6 +1162,7 @@ header .mega-menu .img img {
   position: absolute;
   top: 0;
   left: 0;
+  transition: calc(var(--main-transition) * 3);
 }
 /* skils end */
 

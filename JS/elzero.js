@@ -4,13 +4,31 @@ console.log(`Hello from JS`)
 // scroll up start
 let up = document.getElementById("up")
 
-window.onscroll = function () {
+up.onclick = function () {
+  window.scrollTo ({
+    top: 0,
+    behavior: "smooth"
+  })
+}
+
+function scroll() {
   if (scrollY >= 200) {
     up.style.right = "12px";
   }else {
     up.style.right = "-100px";
   }
-    //skills animation section
+}
+
+window.addEventListener("scroll", scroll)
+
+// scroll up end
+
+// skills start
+let sectionTop = document.querySelector(".our-skills")
+let sectionBottom = document.querySelector(".how-it-works")
+let progSpan = document.querySelectorAll(".skills .skill div.progg span")
+
+function skills() {
   if ((window.scrollY >= sectionTop.offsetTop - 50) && (window.scrollY <= sectionBottom.offsetTop - 100)) {
     progSpan.forEach((span) => {
       span.style.width = span.dataset.width;
@@ -22,33 +40,7 @@ window.onscroll = function () {
   }
 }
 
-up.onclick = function () {
-  window.scrollTo ({
-    top: 0,
-    behavior: "smooth"
-  })
-}
-// scroll up end
-
-// skills start
-let sectionTop = document.querySelector(".our-skills")
-let sectionBottom = document.querySelector(".how-it-works")
-let progSpan = document.querySelectorAll(".skills .skill div.progg span")
-
-/*the code won't work because it uses "onscroll" event , that i'm already using in the previous section ,
-   so i should just use all related in events in one event */
-
-// window.onscroll = function () {
-//   if ((window.scrollY >= sectionTop.offsetTop - 50) && (window.scrollY <= sectionBottom.offsetTop - 100)) {
-//     progSpan.forEach((span) => {
-//       span.style.width = span.dataset.width;
-//     })
-//   }else {
-//     progSpan.forEach((span) => {
-//       span.style.width = 0;
-//     })
-//   }
-// }
+window.addEventListener("scroll", skills)
 
 // skills end
 
@@ -73,4 +65,36 @@ setInterval(() => {
     clearInterval()
   }
 }, 1000);
+
 // latest event  end 
+
+//stats start
+let nums = document.querySelectorAll(".stats .box .number")
+let statsSection = document.querySelector(".stats")
+let statsSectionBot = document.querySelector(".discount")
+let started = false;
+
+function startCount (ele) {
+  let goal = ele.dataset.goal;
+  let count = setInterval(() => {
+    ele.textContent++;
+    if (ele.textContent == goal) {
+      clearInterval(count)
+    }
+  }, (3000 / goal));
+}
+
+function stats() {
+  if (window.scrollY >= statsSection.offsetTop - 150) {
+    if (!started) {
+      nums.forEach((num) => {
+        startCount(num)
+      })    
+    }
+    started = true;
+    }
+}
+
+window.addEventListener("scroll", stats)
+
+//stats end 
